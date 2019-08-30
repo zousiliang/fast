@@ -7,8 +7,8 @@ DROP TABLE IF EXISTS `t_cut_price`;
 CREATE TABLE `t_cut_price` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `luck` varchar(50) DEFAULT NULL COMMENT '幸运值',
-  `created_by` varchar(255) DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
+  `created_by` varchar(255) DEFAULT NULL COMMENT '创建人',
+  `created_date` datetime DEFAULT NULL  COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
