@@ -23,6 +23,11 @@ sharding:
     config:
       sharding:
         defaultDataSourceName: ds0
+      masterslave:
+        name: ms
+        master-data-source-name: ds0
+        slave-data-source-names: ds1
       props:
-        sql.show: true  # 显示sql语句
+        sql.show: true
+
 
