@@ -1,0 +1,28 @@
+server:
+  port: 80
+sharding:
+  jdbc:
+    datasource:
+      names: ds0,ds1
+      ds0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url:  jdbc:mysql://ip:port/mldn8001?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: root
+        maxPoolSize: 50
+        minPoolSize: 1
+      ds1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url:  jdbc:mysql://ip:port/mldn8002?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: root
+        maxPoolSize: 50
+        minPoolSize: 1
+    config:
+      sharding:
+        defaultDataSourceName: ds0
+      props:
+        sql.show: true  # 显示sql语句
+
