@@ -28,8 +28,8 @@ sharding:
          props:
             sql.show: true  # 显示sql语句
          tables:  #分片表定义
-           t_price: #逻辑表
-             actual-data-nodes: ds${0..1}.t_price${0..1} #数据节点
+           t_cut_price: #逻辑表
+             actual-data-nodes: ds${0..1}.t_cut_price${0..1} #数据节点
              database-strategy:   #数据源分片策略
                inline:
                       sharding-column: created_by
@@ -38,7 +38,7 @@ sharding:
                inline:
                       sharding-column: luck
                       algorithm-expression: t_price${ Integer.valueOf(luck).intValue() % 2 }  #根据id进行表的分片
-            # keyGeneratorColumnName: luck
+             #keyGeneratorColumnName: luck
         # default-data-source-name: ds0
 
 #    config:
