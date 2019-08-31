@@ -11,9 +11,7 @@ import java.util.Iterator;
 /**
  * Created by zousiliang on 19/8/30.
  */
-public class CutPriceTimePreciseShardingAlgorithm
-
-      //  implements PreciseShardingAlgorithm<Date>
+public class CutPriceTimePreciseShardingAlgorithm implements PreciseShardingAlgorithm<Date>
 
 {
 
@@ -30,7 +28,7 @@ public class CutPriceTimePreciseShardingAlgorithm
 
     //数据源接口
 
-   // @Override
+    @Override
     public String doSharding(Collection<String> availableTargetNames, PreciseShardingValue<Date> shardingValue) {
 
         Date d = shardingValue.getValue();
