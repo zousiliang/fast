@@ -2,43 +2,60 @@ server:
   port: 8080
 spring:
   application:
-    name: fast-jdbc-starter
-sharding:
-  jdbc:
-    datasource:
-      names: ds0,ds1
-      ds0:
-        type: com.alibaba.druid.pool.DruidDataSource
-        driver-class-name: com.mysql.jdbc.Driver
-        url:  jdbc:mysql://ip:port/mldn8001?useUnicode=true&characterEncoding=utf-8&useSSL=false
-        username: root
-        password: root
-        maxPoolSize: 50
-        minPoolSize: 1
-      ds1:
-        type: com.alibaba.druid.pool.DruidDataSource
-        driver-class-name: com.mysql.jdbc.Driver
-        url:  jdbc:mysql://ip:port/mldn8002?useUnicode=true&characterEncoding=utf-8&useSSL=false
-        username: root
-        password: root
-        maxPoolSize: 50
-        minPoolSize: 1
-    config:
-      sharding:
-         props:
-            sql.show: true  # 显示sql语句
-         tables:  #分片表定义
-           t_cut_price: #逻辑表
-             actual-data-nodes: ds${0..1}.t_cut_price${0..1} #数据节点
-             database-strategy:   #数据源分片策略
-               inline:
-                      sharding-column: created_by
-                      algorithm-expression: ds${ Integer.valueOf(created_by).intValue() % 2 }  #根据created_by进行数据源分片
-             table-strategy:
-               inline:
-                      sharding-column: luck
-                      algorithm-expression: t_price${ Integer.valueOf(luck).intValue() % 2 }  #根据luck(幸运值)进行表的分片
-             keyGeneratorColumnName: luck
+    name: shard-jdbc-yb
+
+#jdbc:
+#   className1: com.mysql.jdbc.Driver
+#   url1: jdbc:mysql://118.89.112.139:3306/mldn8001?useUnicode=true&characterEncoding=utf-8&useSSL=false
+#   user1: root
+#   password1: zsl@002
+#
+#   className2: com.mysql.jdbc.Driver
+#   url2: jdbc:mysql://118.89.112.139:3306/mldn8001?useUnicode=true&characterEncoding=utf-8&useSSL=false
+#   user2: root
+#   password2: zsl@002
+
+#server:
+#  port: 8080
+#spring:
+#  application:
+#    name: fast-jdbc-starter
+#sharding:
+#  jdbc:
+#    datasource:
+#      names: ds0,ds1
+#      ds0:
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        driver-class-name: com.mysql.jdbc.Driver
+#        url:  jdbc:mysql://ip:port/mldn8001?useUnicode=true&characterEncoding=utf-8&useSSL=false
+#        username: root
+#        password: root
+#        maxPoolSize: 50
+#        minPoolSize: 1
+#      ds1:
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        driver-class-name: com.mysql.jdbc.Driver
+#        url:  jdbc:mysql://ip:port/mldn8002?useUnicode=true&characterEncoding=utf-8&useSSL=false
+#        username: root
+#        password: root
+#        maxPoolSize: 50
+#        minPoolSize: 1
+#    config:
+#      sharding:
+#         props:
+#            sql.show: true  # 显示sql语句
+#         tables:  #分片表定义
+#           t_cut_price: #逻辑表
+#             actual-data-nodes: ds${0..1}.t_cut_price${0..1} #数据节点
+#             database-strategy:   #数据源分片策略
+#               inline:
+#                      sharding-column: created_by
+#                      algorithm-expression: ds${ Integer.valueOf(created_by).intValue() % 2 }  #根据created_by进行数据源分片
+#             table-strategy:
+#               inline:
+#                      sharding-column: luck
+#                      algorithm-expression: t_price${ Integer.valueOf(luck).intValue() % 2 }  #根据luck(幸运值)进行表的分片
+#             keyGeneratorColumnName: luck
         # default-data-source-name: ds0
 
 #    config:
@@ -51,6 +68,6 @@ sharding:
 #      props:
 #        sql.show: true  # 显示sql语句
 #
-mybatis:
-  configuration:
-    map-underscore-to-camel-case: true
+#mybatis:
+#  configuration:
+#    map-underscore-to-camel-case: true
