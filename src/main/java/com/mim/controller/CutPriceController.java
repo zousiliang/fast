@@ -21,8 +21,11 @@ public class CutPriceController {
 
     @RequestMapping("add")
     public CutPrice addOrder(CutPrice o){
-        int luck=(int)(Math.random()*100)+1;;
-        o.setLuck(Integer.toString(luck));
+        if (null==o.getLuck()){
+            int luck=(int)(Math.random()*100)+1;;
+            o.setLuck(Integer.toString(luck));
+        }
+
         if (null==o.getCreatedBy()){
             o.setCreatedBy("God");
         }
