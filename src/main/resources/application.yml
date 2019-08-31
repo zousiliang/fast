@@ -36,7 +36,7 @@ sharding:
                inline:
                       sharding-column: luck
                       algorithm-expression: t_cut_price$->{ luck % 2 }  #根据id进行表的分片
-             #keyGeneratorColumnName: id
+             keyGeneratorColumnName: luck
          default-data-source-name: ds0
       props:
         sql.show: true  # 显示sql语句
