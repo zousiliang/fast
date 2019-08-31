@@ -33,12 +33,12 @@ sharding:
              database-strategy:   #数据源分片策略
                inline:
                       sharding-column: created_by
-                      algorithm-expression: ds${ Integer.valueOf(created_by).intValue() % 2 }  #根据luck(幸运值)进行数据源分片
+                      algorithm-expression: ds${ Integer.valueOf(created_by).intValue() % 2 }  #根据created_by进行数据源分片
              table-strategy:
                inline:
                       sharding-column: luck
-                      algorithm-expression: t_price${ Integer.valueOf(luck).intValue() % 2 }  #根据id进行表的分片
-             #keyGeneratorColumnName: luck
+                      algorithm-expression: t_price${ Integer.valueOf(luck).intValue() % 2 }  #根据luck(幸运值)进行表的分片
+             keyGeneratorColumnName: luck
         # default-data-source-name: ds0
 
 #    config:
