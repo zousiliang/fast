@@ -1,0 +1,36 @@
+dataSources:
+  ds0: !!com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://ip:port/mldn8001?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: root
+  ds1: !!com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://ip:port/mldn8002?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: root
+shardingRule:
+  tables:
+    t_cut_price:
+      actualDataNodes: ds${0..1}.t_cut_price${0..1}
+      databaseStrategy:
+        inline:
+          shardingColumn: created_by
+          algorithmExpression: ds${Integer.valueOf(created_by).intValue()  % 2}
+      tableStrategy:
+        inline:
+          shardingColumn: luck
+          algorithmExpression: t_cut_price${Integer.valueOf(luck).intValue() % 2}
+      #keyGeneratorColumnName: id
+  bindingTables:
+    - t_cut_price
+  defaultDataSourceName: ds0
+  defaultDatabaseStrategy:
+    inline:
+      shardingColumn: id
+      algorithmExpression: ds${id % 2}
+  defaultTableStrategy:
+    none:
+  props:
+    sql.show: true
+
